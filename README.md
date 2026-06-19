@@ -193,13 +193,28 @@ CodeAlpha_CloudBusPassSystem/
 
 ## 📸 Screenshots Section
 
-      <img width="1920" height="1080" alt="Screenshot 2026-06-17 113206" src="https://github.com/user-attachments/assets/9ea86db4-8907-4ad8-af57-629924650692" />
-      <img width="1836" height="882" alt="Screenshot 2026-06-17 112722" src="https://github.com/user-attachments/assets/ddcf3afc-5714-4683-8ce4-810f7b75b246" />
-      <img width="1890" height="901" alt="Screenshot 2026-06-19 105946" src="https://github.com/user-attachments/assets/1453c441-ab92-420f-ba4c-c43fa28e56c0" />
-      <img width="1865" height="711" alt="Screenshot 2026-06-19 110045" src="https://github.com/user-attachments/assets/717143e6-97c4-44d3-ab38-d2fe5759403a" />
-      <img width="980" height="451" alt="Screenshot 2026-06-19 110201" src="https://github.com/user-attachments/assets/5f4dd06a-d45a-45fa-93f2-2f32e49c148c" />
-      <img width="555" height="482" alt="Screenshot 2026-06-19 110217" src="https://github.com/user-attachments/assets/29f04f47-a845-4943-ad94-0ee1c443729b" />
+       
+<img alt="Opera Snapshot_2026-06-19_123558_index html" src="https://github.com/user-attachments/assets/bf792ca3-7de1-45d5-a6ca-eed205cf6356"  width="800" />
 
+
+
+<img src="https://github.com/user-attachments/assets/d4450e2f-ed8a-421a-b363-3f8361d47323" width="800"/>
+
+
+<img src="https://github.com/user-attachments/assets/da7a4680-59af-43de-ae91-1ecc9f2f11d7" width="800"/>
+
+
+<img src="https://github.com/user-attachments/assets/65c93c33-131d-4d6f-81a0-fd4e563a6bf8" width="800"/>
+
+
+<img src="https://github.com/user-attachments/assets/61935802-7695-47a1-b627-abad550e8236" width="800" />
+
+
+
+<img src="https://github.com/user-attachments/assets/1b0fcab3-25b1-443d-979e-3c45daa787af" width="800"/>
+
+
+<img src="https://github.com/user-attachments/assets/faea191a-e8a6-4945-b127-2a9bf20e107b" width="800"/>
 
 
 ## 🔮 Future Improvements
