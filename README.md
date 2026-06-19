@@ -193,14 +193,12 @@ CodeAlpha_CloudBusPassSystem/
 
 ## 📸 Screenshots Section
 
-> Add your own screenshots here after running the app locally or visiting your deployed Hosting URL:
->
-> - `Landing Page` — hero section, features, pricing
-> - `Login / Register` — auth screens
-> - `User Dashboard` — overview stats, apply form with live fare breakdown
-> - `My Passes` — pass cards with view/download/renew/cancel actions
-> - `Digital Pass Modal` — certificate with QR code
-> - `Admin Dashboard` — revenue stats, pending approvals, searchable tables
+      <img width="1920" height="1080" alt="Screenshot 2026-06-17 113206" src="https://github.com/user-attachments/assets/9ea86db4-8907-4ad8-af57-629924650692" />
+      <img width="1836" height="882" alt="Screenshot 2026-06-17 112722" src="https://github.com/user-attachments/assets/ddcf3afc-5714-4683-8ce4-810f7b75b246" />
+      <img width="1890" height="901" alt="Screenshot 2026-06-19 105946" src="https://github.com/user-attachments/assets/1453c441-ab92-420f-ba4c-c43fa28e56c0" />
+      <img width="1865" height="711" alt="Screenshot 2026-06-19 110045" src="https://github.com/user-attachments/assets/717143e6-97c4-44d3-ab38-d2fe5759403a" />
+      <img width="980" height="451" alt="Screenshot 2026-06-19 110201" src="https://github.com/user-attachments/assets/5f4dd06a-d45a-45fa-93f2-2f32e49c148c" />
+      <img width="555" height="482" alt="Screenshot 2026-06-19 110217" src="https://github.com/user-attachments/assets/29f04f47-a845-4943-ad94-0ee1c443729b" />
 
 ---
 
