@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — CodeAlpha Cloud Bus Pass System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚌</text></svg>" />
+
+  <!-- PDF + QR generation libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+  <div class="ambient-bg"><span class="blob-1"></span><span class="blob-2"></span></div>
+
+  <div class="dashboard-layout">
+    <!-- ===================== SIDEBAR ===================== -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar__brand">
+        <span class="logo-badge">🚌</span>
+        <span>CodeAlpha Transit</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#" class="sidebar-link sidebar-link--active" data-tab="tab-overview"><span class="icon">📊</span> Overview</a>
+        <a href="#" class="sidebar-link" data-tab="tab-apply"><span class="icon">📝</span> Apply for Pass</a>
+        <a href="#" class="sidebar-link" data-tab="tab-my-passes"><span class="icon">🪪</span> My Passes</a>
+        <a href="#" class="sidebar-link" data-tab="tab-history"><span class="icon">🕓</span> Pass History</a>
+        <a href="#" class="sidebar-link" data-tab="tab-info"><span class="icon">ℹ️</span> About the Cloud</a>
+      </nav>
+
+      <div class="sidebar__user">
+        <div class="user-avatar" data-user-avatar>U</div>
+        <div class="sidebar__user-info">
+          <strong data-user-name>User</strong>
+          <span data-user-email>user@example.com</span>
+        </div>
+      </div>
+      <button class="btn btn--outline btn--full sidebar__logout" data-logout>Log Out</button>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ===================== MAIN CONTENT ===================== -->
+    <main class="main-content">
+      <div class="topbar">
+        <div>
+          <button class="sidebar-toggle-btn" id="sidebarToggle">☰</button>
+          <h1>Welcome back 👋</h1>
+          <p>Manage your bus passes from one place.</p>
+        </div>
+      </div>
+
+      <!-- ===== TAB: OVERVIEW ===== -->
+      <section class="tab-panel tab-panel--active fade-in" id="tab-overview">
+        <div class="stats-grid">
+          <div class="stat-widget stat-widget--cyan glass-card">
+            <div class="stat-widget__icon">🪪</div>
+            <h3 id="statActivePasses">0</h3>
+            <span class="stat-label">Active Passes</span>
+          </div>
+          <div class="stat-widget stat-widget--warning glass-card">
+            <div class="stat-widget__icon">⏳</div>
+            <h3 id="statPendingPasses">0</h3>
+            <span class="stat-label">Pending Approval</span>
+          </div>
+          <div class="stat-widget stat-widget--violet glass-card">
+            <div class="stat-widget__icon">📚</div>
+            <h3 id="statTotalPasses">0</h3>
+            <span class="stat-label">Total Passes (All Time)</span>
+          </div>
+          <div class="stat-widget stat-widget--success glass-card">
+            <div class="stat-widget__icon">💰</div>
+            <h3 id="statTotalSpent">₹0</h3>
+            <span class="stat-label">Total Spent</span>
+          </div>
+        </div>
+
+        <div class="glass-panel" style="padding:28px;">
+          <h3 style="margin-bottom:14px;">Quick Actions</h3>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <button class="btn btn--primary" onclick="document.querySelector('[data-tab=tab-apply]').click()">+ Apply for New Pass</button>
+            <button class="btn btn--outline" onclick="document.querySelector('[data-tab=tab-my-passes]').click()">View My Passes</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== TAB: APPLY ===== -->
+      <section class="tab-panel" id="tab-apply">
+        <div class="application-grid">
+          <div class="application-form-panel glass-panel fade-in">
+            <h3 style="margin-bottom:20px;">Bus Pass Application Form</h3>
+            <form id="passApplicationForm" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="applicantName">Full Name</label>
+                  <input type="text" id="applicantName" class="input" required />
+                </div>
+                <div class="form-group">
+                  <label for="applicantAge">Age</label>
+                  <input type="number" id="applicantAge" class="input" min="1" max="120" required />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="applicantGender">Gender</label>
+                  <select id="applicantGender" class="input" required>
+                    <option value="">Select gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="applicantMobile">Mobile Number</label>
+                  <input type="tel" id="applicantMobile" class="input" maxlength="10" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="applicantEmail">Email</label>
+                <input type="email" id="applicantEmail" class="input" required />
+              </div>
+              <div class="form-group">
+                <label for="applicantAddress">Address</label>
+                <textarea id="applicantAddress" class="input" rows="2" required></textarea>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="sourceLocation">Source Location</label>
+                  <input type="text" id="sourceLocation" class="input" placeholder="e.g. Sholapur" required />
+                </div>
+                <div class="form-group">
+                  <label for="destinationLocation">Destination Location</label>
+                  <input type="text" id="destinationLocation" class="input" placeholder="e.g. Pune" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="passType">Pass Type</label>
+                <select id="passType" class="input" required>
+                  <option value="">Select pass type</option>
+                  <option value="Daily">Daily Pass — ₹30</option>
+                  <option value="Weekly">Weekly Pass — ₹150</option>
+                  <option value="Monthly">Monthly Pass — ₹500</option>
+                  <option value="Yearly">Yearly Pass — ₹5000</option>
+                </select>
+              </div>
+              <button type="submit" id="submitApplicationBtn" class="btn btn--primary btn--full btn--lg">Submit Application</button>
+            </form>
+          </div>
+
+          <div class="fare-panel glass-panel fade-in">
+            <h3>Fare Breakdown</h3>
+            <div class="fare-breakdown-box" id="fareBreakdown">
+              <p class="fare-empty">Select a pass type to see the fare.</p>
+            </div>
+            <p style="font-size:0.78rem;color:var(--text-muted);margin-top:16px;">Fares are fixed by the system and cannot be edited manually, ensuring accurate and fair pricing for every rider.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== TAB: MY PASSES ===== -->
+      <section class="tab-panel" id="tab-my-passes">
+        <div class="passes-list-grid" id="myPassesList">
+          <div class="empty-state"><p>Loading your passes...</p></div>
+        </div>
+      </section>
+
+      <!-- ===== TAB: HISTORY ===== -->
+      <section class="tab-panel" id="tab-history">
+        <div class="glass-panel" style="padding:10px;">
+          <div class="table-wrapper" id="historyList">
+            <div class="empty-state"><p>Loading history...</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== TAB: INFO (Reliability + Scalability explanation) ===== -->
+      <section class="tab-panel" id="tab-info">
+        <div class="info-card-grid">
+          <div class="info-card glass-card">
+            <h4>🛡️ Reliability of Cloud-Based Passes</h4>
+            <p>Unlike a paper pass that can be lost, torn, or forgotten at home, your digital pass lives permanently in secure cloud storage. It's tied to your account, not a physical object.</p>
+            <ul>
+              <li>Re-download your pass PDF anytime, unlimited times</li>
+              <li>Real-time updates the moment your pass is approved or renewed</li>
+              <li>Built-in validation prevents incorrect or duplicate submissions</li>
+              <li>Network error handling keeps the app usable even on flaky connections</li>
+            </ul>
+          </div>
+          <div class="info-card glass-card">
+            <h4>📈 Scalability with Firebase</h4>
+            <p>This platform runs on Firebase, Google's serverless application backend, which automatically scales to handle demand spikes without any manual server management.</p>
+            <ul>
+              <li>Firestore queries are indexed and targeted for fast reads</li>
+              <li>Pagination keeps large datasets fast to browse</li>
+              <li>Firebase Hosting serves the app over a global CDN</li>
+              <li>Authentication scales to millions of users out of the box</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ===================== PASS VIEW MODAL ===================== -->
+  <div class="modal" id="passModal">
+    <div class="modal__box glass-panel">
+      <button class="modal__close" data-close-modal>&times;</button>
+      <div id="passModalContent"></div>
+      <div style="margin-top:20px;display:flex;gap:10px;">
+        <button class="btn btn--outline btn--full" data-close-modal>Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module" src="js/app.js"></script>
+  <script type="module" src="js/auth.js"></script>
+  <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Log In — CodeAlpha Cloud Bus Pass System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚌</text></svg>" />
+</head>
+<body>
+  <div class="ambient-bg"><span class="blob-1"></span><span class="blob-2"></span><span class="blob-3"></span></div>
+
+  <div class="auth-wrapper">
+    <div class="auth-card glass-panel slide-up">
+      <div class="auth-logo">
+        <span class="logo-badge">🚌</span>
+        <strong style="font-family:var(--font-display);font-size:1.1rem;">CodeAlpha Transit</strong>
+      </div>
+      <h2>Welcome back</h2>
+      <p class="auth-subtitle">Log in to manage your bus passes</p>
+
+      <form id="loginForm" novalidate>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" class="input" placeholder="you@example.com" autocomplete="email" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" class="input" placeholder="••••••••" autocomplete="current-password" required />
+          <a href="#" id="forgotPasswordLink" class="forgot-link">Forgot password?</a>
+        </div>
+        <button type="submit" id="loginBtn" class="btn btn--primary btn--full btn--lg">Log In</button>
+      </form>
+
+      <div class="auth-divider">OR</div>
+      <p class="auth-footer-link">Don't have an account? <a href="register.html">Create one</a></p>
+      <p class="auth-footer-link"><a href="index.html">← Back to home</a></p>
+    </div>
+  </div>
+
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module" src="js/app.js"></script>
+  <script type="module" src="js/auth.js"></script>
+</body>
+</html>

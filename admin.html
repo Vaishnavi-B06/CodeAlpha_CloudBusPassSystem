@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard — CodeAlpha Cloud Bus Pass System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚌</text></svg>" />
+</head>
+<body>
+  <div class="ambient-bg"><span class="blob-1"></span><span class="blob-2"></span></div>
+
+  <div class="dashboard-layout">
+    <!-- ===================== SIDEBAR ===================== -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar__brand">
+        <span class="logo-badge">🚌</span>
+        <span>Admin Panel</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#" class="sidebar-link sidebar-link--active" data-tab="tab-admin-overview"><span class="icon">📊</span> Overview</a>
+        <a href="#" class="sidebar-link" data-tab="tab-admin-approvals"><span class="icon">✅</span> Pending Approvals</a>
+        <a href="#" class="sidebar-link" data-tab="tab-admin-passes"><span class="icon">🪪</span> All Passes</a>
+        <a href="#" class="sidebar-link" data-tab="tab-admin-users"><span class="icon">👥</span> All Users</a>
+      </nav>
+
+      <div class="sidebar__user">
+        <div class="user-avatar" data-user-avatar>A</div>
+        <div class="sidebar__user-info">
+          <strong data-user-name>Admin</strong>
+          <span data-user-email>admin@example.com</span>
+        </div>
+      </div>
+      <button class="btn btn--outline btn--full sidebar__logout" data-logout>Log Out</button>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ===================== MAIN CONTENT ===================== -->
+    <main class="main-content">
+      <div class="topbar">
+        <div>
+          <button class="sidebar-toggle-btn" id="sidebarToggle">☰</button>
+          <h1>Admin Dashboard 🛠️</h1>
+          <p>Manage users, passes, and approvals in real time.</p>
+        </div>
+      </div>
+
+      <!-- ===== TAB: OVERVIEW ===== -->
+      <section class="tab-panel tab-panel--active fade-in" id="tab-admin-overview">
+        <div class="stats-grid">
+          <div class="stat-widget stat-widget--cyan glass-card">
+            <div class="stat-widget__icon">👥</div>
+            <h3 id="adminStatUsers">0</h3>
+            <span class="stat-label">Total Users</span>
+          </div>
+          <div class="stat-widget stat-widget--violet glass-card">
+            <div class="stat-widget__icon">🪪</div>
+            <h3 id="adminStatPasses">0</h3>
+            <span class="stat-label">Total Passes</span>
+          </div>
+          <div class="stat-widget stat-widget--success glass-card">
+            <div class="stat-widget__icon">✅</div>
+            <h3 id="adminStatActive">0</h3>
+            <span class="stat-label">Active Passes</span>
+          </div>
+          <div class="stat-widget stat-widget--danger glass-card">
+            <div class="stat-widget__icon">⌛</div>
+            <h3 id="adminStatExpired">0</h3>
+            <span class="stat-label">Expired Passes</span>
+          </div>
+          <div class="stat-widget stat-widget--warning glass-card">
+            <div class="stat-widget__icon">⏳</div>
+            <h3 id="adminStatPending">0</h3>
+            <span class="stat-label">Pending Approval</span>
+          </div>
+          <div class="stat-widget stat-widget--pink glass-card">
+            <div class="stat-widget__icon">💰</div>
+            <h3 id="adminStatRevenue">₹0</h3>
+            <span class="stat-label">Total Revenue</span>
+          </div>
+        </div>
+
+        <div class="glass-panel" style="padding:28px;">
+          <h3 style="margin-bottom:8px;">Recent Pending Applications</h3>
+          <p style="color:var(--text-secondary);font-size:0.88rem;margin-bottom:18px;">Review and act on the latest applications below, or head to the Pending Approvals tab for the full list.</p>
+          <div class="passes-list-grid" id="pendingApprovalsPreview"></div>
+        </div>
+      </section>
+
+      <!-- ===== TAB: PENDING APPROVALS ===== -->
+      <section class="tab-panel" id="tab-admin-approvals">
+        <div class="passes-list-grid" id="pendingApprovalsList">
+          <div class="empty-state"><p>Loading applications...</p></div>
+        </div>
+      </section>
+
+      <!-- ===== TAB: ALL PASSES ===== -->
+      <section class="tab-panel" id="tab-admin-passes">
+        <div class="search-bar">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="adminSearchInput" class="input" placeholder="Search by name, pass ID, mobile, source, or destination..." />
+        </div>
+        <div class="glass-panel" style="padding:10px;">
+          <div class="table-wrapper" id="allPassesTable">
+            <div class="empty-state"><p>Loading passes...</p></div>
+          </div>
+          <div class="pagination" id="passesPagination"></div>
+        </div>
+      </section>
+
+      <!-- ===== TAB: ALL USERS ===== -->
+      <section class="tab-panel" id="tab-admin-users">
+        <div class="search-bar">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="adminUserSearchInput" class="input" placeholder="Search by name, email, or mobile..." />
+        </div>
+        <div class="glass-panel" style="padding:10px;">
+          <div class="table-wrapper" id="allUsersTable">
+            <div class="empty-state"><p>Loading users...</p></div>
+          </div>
+          <div class="pagination" id="usersPagination"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module" src="js/app.js"></script>
+  <script type="module" src="js/auth.js"></script>
+  <script type="module" src="js/dashboard.js"></script>
+
+  <!-- Mirror the pending approvals list into the overview preview panel -->
+  <script>
+    const observer = new MutationObserver(() => {
+      const source = document.getElementById('pendingApprovalsList');
+      const preview = document.getElementById('pendingApprovalsPreview');
+      if (source && preview) {
+        const cards = Array.from(source.querySelectorAll('.pass-card')).slice(0, 3);
+        if (cards.length) {
+          preview.innerHTML = '';
+          cards.forEach(c => preview.appendChild(c.cloneNode(true)));
+        } else if (!source.querySelector('.empty-state')) {
+          // still loading
+        } else {
+          preview.innerHTML = '<div class="empty-state"><p>No pending applications. All caught up!</p></div>';
+        }
+      }
+    });
+    document.addEventListener('DOMContentLoaded', () => {
+      const target = document.getElementById('pendingApprovalsList');
+      if (target) observer.observe(target, { childList: true, subtree: false });
+    });
+  </script>
+</body>
+</html>

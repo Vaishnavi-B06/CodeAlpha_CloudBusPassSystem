@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Account — CodeAlpha Cloud Bus Pass System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚌</text></svg>" />
+</head>
+<body>
+  <div class="ambient-bg"><span class="blob-1"></span><span class="blob-2"></span><span class="blob-3"></span></div>
+
+  <div class="auth-wrapper">
+    <div class="auth-card glass-panel slide-up">
+      <div class="auth-logo">
+        <span class="logo-badge">🚌</span>
+        <strong style="font-family:var(--font-display);font-size:1.1rem;">CodeAlpha Transit</strong>
+      </div>
+      <h2>Create your account</h2>
+      <p class="auth-subtitle">Start applying for digital bus passes today</p>
+
+      <form id="registerForm" novalidate>
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" class="input" placeholder="Jane Doe" autocomplete="name" required />
+          <span class="field-error" id="fullNameError"></span>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" class="input" placeholder="you@example.com" autocomplete="email" required />
+          <span class="field-error" id="emailError"></span>
+        </div>
+        <div class="form-group">
+          <label for="mobile">Mobile Number</label>
+          <input type="tel" id="mobile" class="input" placeholder="9876543210" autocomplete="tel" maxlength="10" required />
+          <span class="field-error" id="mobileError"></span>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" class="input" placeholder="Min 6 characters" autocomplete="new-password" required />
+            <span class="field-error" id="passwordError"></span>
+          </div>
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" class="input" placeholder="Re-enter password" autocomplete="new-password" required />
+            <span class="field-error" id="confirmPasswordError"></span>
+          </div>
+        </div>
+        <button type="submit" id="registerBtn" class="btn btn--primary btn--full btn--lg">Create Account</button>
+      </form>
+
+      <div class="auth-divider">OR</div>
+      <p class="auth-footer-link">Already have an account? <a href="login.html">Log in</a></p>
+      <p class="auth-footer-link"><a href="index.html">← Back to home</a></p>
+    </div>
+  </div>
+
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module" src="js/app.js"></script>
+  <script type="module" src="js/auth.js"></script>
+</body>
+</html>

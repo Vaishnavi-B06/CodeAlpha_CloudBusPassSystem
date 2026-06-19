@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CodeAlpha Cloud Bus Pass System — Smart Transit Passes</title>
+  <meta name="description" content="A cloud-native bus pass management platform built with Firebase. Apply, manage, and download digital bus passes in seconds." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚌</text></svg>" />
+</head>
+<body>
+  <div class="ambient-bg"><span class="blob-1"></span><span class="blob-2"></span><span class="blob-3"></span></div>
+
+  <!-- ===================== NAVIGATION ===================== -->
+  <nav class="landing-nav">
+    <div class="landing-nav__brand">
+      <span class="logo-badge">🚌</span>
+      <span>CodeAlpha Transit</span>
+    </div>
+    <div class="landing-nav__links">
+      <a href="login.html" class="btn btn--outline btn--sm">Log In</a>
+      <a href="register.html" class="btn btn--primary btn--sm">Get Started</a>
+    </div>
+  </nav>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero">
+    <div class="hero__content slide-up">
+      <span class="hero__eyebrow">⚡ CodeAlpha Cloud Computing Internship Project</span>
+      <h1>Your bus pass, <span class="gradient-text">reimagined for the cloud.</span></h1>
+      <p class="lead">Apply, pay, and carry your bus pass entirely online. No queues, no lost paper passes — just a secure digital pass you can access and re-download anytime, anywhere.</p>
+      <div class="hero__cta">
+        <a href="register.html" class="btn btn--primary btn--lg">Apply for a Pass →</a>
+        <a href="#features" class="btn btn--outline btn--lg">Explore Features</a>
+      </div>
+      <div class="hero__stats">
+        <div class="stat-block"><h3 id="heroStatPasses">12,400+</h3><span>Passes Issued</span></div>
+        <div class="stat-block"><h3 id="heroStatUptime">99.9%</h3><span>System Uptime</span></div>
+        <div class="stat-block"><h3 id="heroStatCities">40+</h3><span>Routes Covered</span></div>
+      </div>
+    </div>
+    <div class="hero__visual">
+      <div class="hero-card-stack">
+        <div class="floating-pass-card card-2">
+          <div class="fp-top"><span class="fp-chip"></span><span class="badge badge--success">Active</span></div>
+          <h4>Weekly Pass</h4>
+          <p class="fp-route">Andheri → Churchgate</p>
+          <div class="fp-bottom"><span class="fp-fare">₹150</span><span style="font-size:0.75rem;color:var(--text-muted)">Exp: 24 Jun</span></div>
+        </div>
+        <div class="floating-pass-card card-1">
+          <div class="fp-top"><span class="fp-chip"></span><span class="badge badge--success">Active</span></div>
+          <h4>Monthly Pass</h4>
+          <p class="fp-route">Sholapur → Pune</p>
+          <div class="fp-bottom"><span class="fp-fare">₹500</span><span style="font-size:0.75rem;color:var(--text-muted)">Exp: 17 Jul</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FEATURES ===================== -->
+  <section class="section" id="features">
+    <div class="section__head">
+      <span class="eyebrow">Platform Features</span>
+      <h2>Everything a modern transit pass needs</h2>
+      <p>Built on Firebase for speed, reliability, and a seamless rider experience from application to renewal.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card glass-card fade-in">
+        <div class="feature-icon">📝</div>
+        <h4>Instant Online Application</h4>
+        <p>Fill a simple form and get your pass request submitted in under a minute — no branch visits required.</p>
+      </div>
+      <div class="feature-card glass-card fade-in">
+        <div class="feature-icon">💳</div>
+        <h4>Automatic Fare Calculation</h4>
+        <p>Fares are computed server-side from a fixed price table, so pricing is always accurate and tamper-proof.</p>
+      </div>
+      <div class="feature-card glass-card fade-in">
+        <div class="feature-icon">🪪</div>
+        <h4>Digital Pass + QR Code</h4>
+        <p>Every pass includes a scannable QR code and can be downloaded as a PDF — re-download it as many times as you like.</p>
+      </div>
+      <div class="feature-card glass-card fade-in">
+        <div class="feature-icon">🔄</div>
+        <h4>Renew in One Click</h4>
+        <p>Expired pass? Renew instantly without re-filling your details from scratch.</p>
+      </div>
+      <div class="feature-card glass-card fade-in">
+        <div class="feature-icon">📊</div>
+        <h4>Live Admin Dashboard</h4>
+        <p>Transit staff get real-time visibility into applications, revenue, and active/expired pass counts.</p>
+      </div>
+      <div class="feature-card glass-card fade-in">
+        <div class="feature-icon">🔒</div>
+        <h4>Secure Cloud Storage</h4>
+        <p>All records live in Firebase Firestore with authenticated access — never lost, never duplicated.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== RELIABILITY INFO ===================== -->
+  <section class="section">
+    <div class="info-split">
+      <div class="info-split__text slide-up">
+        <span class="eyebrow" style="color:var(--success);font-weight:700;font-size:0.82rem;letter-spacing:0.06em;text-transform:uppercase;display:block;margin-bottom:10px;">Reliability</span>
+        <h2>Why cloud-based passes beat paper, every time</h2>
+        <p>Traditional paper bus passes depend on a single physical object: lose it, damage it, or forget it, and you're stuck buying a fresh one or arguing with a conductor. A cloud-based system removes that single point of failure entirely.</p>
+        <ul class="info-list">
+          <li><span class="check-dot">✓</span> Your pass record lives permanently in Firestore — it cannot be physically lost or torn.</li>
+          <li><span class="check-dot">✓</span> Re-download your PDF pass unlimited times from any device, instantly.</li>
+          <li><span class="check-dot">✓</span> Real-time sync means status changes (approval, renewal, cancellation) reflect immediately everywhere.</li>
+          <li><span class="check-dot">✓</span> Built-in form validation and error handling catch mistakes before they become problems.</li>
+          <li><span class="check-dot">✓</span> Firebase's distributed infrastructure means no single server outage takes the system down.</li>
+        </ul>
+      </div>
+      <div class="info-split__visual">
+        <div class="glass-panel" style="padding:30px;">
+          <h4 style="margin-bottom:16px;">Paper Pass vs Cloud Pass</h4>
+          <table class="data-table" style="min-width:0;">
+            <thead><tr><th></th><th>Paper</th><th>Cloud</th></tr></thead>
+            <tbody>
+              <tr><td>Loss protection</td><td>❌ None</td><td>✅ Always recoverable</td></tr>
+              <tr><td>Re-download anytime</td><td>❌ No</td><td>✅ Yes</td></tr>
+              <tr><td>Instant status updates</td><td>❌ Manual</td><td>✅ Real-time</td></tr>
+              <tr><td>Fraud-proof pricing</td><td>⚠️ Manual entry</td><td>✅ System enforced</td></tr>
+              <tr><td>Available 24/7</td><td>❌ Office hours</td><td>✅ Always on</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SCALABILITY INFO ===================== -->
+  <section class="section">
+    <div class="info-split">
+      <div class="info-split__visual" style="order:1;">
+        <div class="glass-panel" style="padding:30px;">
+          <h4 style="margin-bottom:18px;">How Firebase scales with demand</h4>
+          <div class="info-card-grid" style="grid-template-columns:1fr;">
+            <div class="info-card" style="background:rgba(255,255,255,0.04);border:1px solid var(--glass-border);border-radius:14px;">
+              <h4>⚙️ Serverless by design</h4>
+              <p>Firestore and Firebase Auth auto-scale infrastructure behind the scenes — no servers to provision or manage as ridership grows.</p>
+            </div>
+            <div class="info-card" style="background:rgba(255,255,255,0.04);border:1px solid var(--glass-border);border-radius:14px;">
+              <h4>📈 Handles traffic spikes</h4>
+              <p>Festival rushes or month-start renewal surges are absorbed automatically without manual capacity planning.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="info-split__text slide-up" style="order:2;">
+        <span class="eyebrow" style="color:var(--accent-violet);font-weight:700;font-size:0.82rem;letter-spacing:0.06em;text-transform:uppercase;display:block;margin-bottom:10px;">Scalability</span>
+        <h2>Built to grow from hundreds to millions of riders</h2>
+        <p>This system uses Firestore's efficient query patterns, pagination, and indexed lookups so that performance stays snappy whether there are 100 passes or 100,000.</p>
+        <ul class="info-list">
+          <li><span class="check-dot">✓</span> Paginated tables in the admin dashboard avoid loading entire collections at once.</li>
+          <li><span class="check-dot">✓</span> Targeted Firestore queries (by user, status, or route) keep reads fast and cheap.</li>
+          <li><span class="check-dot">✓</span> Real-time listeners only sync relevant data, not the whole database.</li>
+          <li><span class="check-dot">✓</span> Firebase Hosting serves static assets via a global CDN for low latency anywhere.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PRICING ===================== -->
+  <section class="section" id="pricing">
+    <div class="section__head">
+      <span class="eyebrow">Transparent Pricing</span>
+      <h2>Fixed fares. No surprises.</h2>
+      <p>Every fare is calculated automatically — the system never lets pricing be edited manually.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card glass-card">
+        <h4>Daily Pass</h4>
+        <div class="price-tag">₹30<span>/day</span></div>
+        <p style="color:var(--text-secondary);font-size:0.85rem;">Perfect for occasional riders</p>
+      </div>
+      <div class="pricing-card glass-card pricing-card--featured">
+        <h4>Weekly Pass</h4>
+        <div class="price-tag">₹150<span>/week</span></div>
+        <p style="color:var(--text-secondary);font-size:0.85rem;">Most popular choice</p>
+      </div>
+      <div class="pricing-card glass-card">
+        <h4>Monthly Pass</h4>
+        <div class="price-tag">₹500<span>/month</span></div>
+        <p style="color:var(--text-secondary);font-size:0.85rem;">Best for daily commuters</p>
+      </div>
+      <div class="pricing-card glass-card">
+        <h4>Yearly Pass</h4>
+        <div class="price-tag">₹5000<span>/year</span></div>
+        <p style="color:var(--text-secondary);font-size:0.85rem;">Maximum savings</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CTA ===================== -->
+  <div class="cta-banner glass-panel">
+    <h2>Ready to go paperless?</h2>
+    <p>Create your account and apply for your first digital bus pass in under two minutes.</p>
+    <a href="register.html" class="btn btn--primary btn--lg">Create Free Account</a>
+  </div>
+
+  <footer class="landing-footer">
+    <p>© 2026 CodeAlpha Cloud Bus Pass System — Built for the CodeAlpha Cloud Computing Internship.</p>
+  </footer>
+
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

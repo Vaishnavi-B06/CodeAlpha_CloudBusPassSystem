@@ -1,0 +1,87 @@
+rules_version = '2';
+
+// ============================================================
+// Firestore Security Rules — CodeAlpha Cloud Bus Pass System
+// ============================================================
+// Collections:
+//   users    -> one document per registered user, keyed by uid
+//   passes   -> bus pass applications/records, each tagged with userId
+//   payments -> payment records, each tagged with userId
+//
+// Admin emails are checked against a fixed allow-list mirrored from
+// js/firebase-config.js (ADMIN_EMAILS). For a real production system,
+// migrate this to a custom claim or an `admins` collection lookup.
+// ============================================================
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAdminEmail(email) {
+      return email in [
+        'admin@codealpha.com',
+        'admin@buspass.com'
+      ];
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && isAdminEmail(request.auth.token.email);
+    }
+
+    // Server-side mirror of FARE_TABLE in js/app.js.
+    // Keep these two in sync whenever fares change.
+    function expectedFare(passType) {
+      return passType == 'Daily' ? 30 :
+             passType == 'Weekly' ? 150 :
+             passType == 'Monthly' ? 500 :
+             passType == 'Yearly' ? 5000 : -1;
+    }
+
+    function hasValidFare() {
+      return request.resource.data.fare == expectedFare(request.resource.data.passType);
+    }
+
+    function hasValidPaymentAmount() {
+      return request.resource.data.amount == expectedFare(request.resource.data.passType);
+    }
+
+    // -------------------- USERS --------------------
+    match /users/{userId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow create: if isOwner(userId);
+      allow update: if isOwner(userId) || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // -------------------- PASSES --------------------
+    match /passes/{passDocId} {
+      allow read: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create: if isSignedIn() && request.resource.data.userId == request.auth.uid && hasValidFare();
+      // Users may update their own pass only to cancel it, or to renew an
+      // already-approved/expired pass back to 'Approved' (renewPass() in
+      // dashboard.js does exactly this). The renewed fare must still match
+      // the official fare table. Admins may update any field (approve/reject/etc).
+      allow update: if isAdmin() ||
+        (isOwner(resource.data.userId) &&
+         (request.resource.data.status == 'Cancelled' ||
+          (resource.data.status == 'Approved' && request.resource.data.status == 'Approved' && hasValidFare())));
+      allow delete: if isAdmin();
+    }
+
+    // -------------------- PAYMENTS --------------------
+    match /payments/{paymentDocId} {
+      allow read: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create: if isSignedIn() && request.resource.data.userId == request.auth.uid && hasValidPaymentAmount();
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+  }
+}
+
